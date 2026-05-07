@@ -19,6 +19,8 @@ Photograph your clothes once. The app learns your wardrobe, suggests outfit comb
 - **Weather:** Open-Meteo
 - **Language:** TypeScript
 
+**Design direction:** Trade Republic + Substack — sustainable, minimal, editorial.
+
 ## Features (Roadmap)
 
 - [x] Project planning & setup
