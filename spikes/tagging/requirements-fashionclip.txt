@@ -1,0 +1,5 @@
+# Heavier deps for the FashionCLIP baseline ONLY. Install when running
+# `--models fashionclip`:
+#   uv pip install -r requirements-fashionclip.txt
+torch>=2.2
+transformers>=4.40

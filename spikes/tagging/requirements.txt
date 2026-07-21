@@ -1,0 +1,7 @@
+# Core harness deps (Claude tagging + dataset + eval). Install:
+#   uv venv --python 3.12
+#   uv pip install -r requirements.txt
+anthropic
+pydantic>=2
+pillow>=10
+datasets>=2.19

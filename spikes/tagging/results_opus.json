@@ -1,0 +1,476 @@
+{
+  "truth": [
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "navy blue",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "bottom",
+      "subcategory": "jeans",
+      "primary_color": "blue",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "silver",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "bottom",
+      "subcategory": "track pants",
+      "primary_color": "black",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tshirts",
+      "primary_color": "grey",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tshirts",
+      "primary_color": "grey",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "green",
+      "seasonality": "summer",
+      "occasions": [
+        "formal"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "purple",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "socks",
+      "primary_color": "navy blue",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "black",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "casual shoes",
+      "primary_color": "black",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "belts",
+      "primary_color": "black",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "flip flops",
+      "primary_color": "black",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "handbags",
+      "primary_color": "blue",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "flip flops",
+      "primary_color": "navy blue",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    }
+  ],
+  "preds": {
+    "claude-opus": [
+      {
+        "name": "Blue and White Checked Short-Sleeve Shirt",
+        "category": "top",
+        "subcategory": "shirt",
+        "primary_color": "blue",
+        "secondary_colors": [
+          "white",
+          "red"
+        ],
+        "is_neutral": false,
+        "pattern": "checked",
+        "material": "cotton",
+        "formality": 3,
+        "warmth": 2,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Dark Wash Straight-Leg Jeans",
+        "category": "bottom",
+        "subcategory": "jeans",
+        "primary_color": "navy",
+        "secondary_colors": [
+          "blue"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "denim",
+        "formality": 2,
+        "warmth": 3,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Silver Mesh Strap Watch",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "silver",
+        "secondary_colors": [
+          "white"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "stainless steel",
+        "formality": 4,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "slim",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Black Track Pants",
+        "category": "bottom",
+        "subcategory": "track pants",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "polyester",
+        "formality": 1,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "active",
+          "casual"
+        ]
+      },
+      {
+        "name": "Teal Short-Sleeve Polo Shirt",
+        "category": "top",
+        "subcategory": "polo shirt",
+        "primary_color": "teal",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton pique",
+        "formality": 2,
+        "warmth": 2,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Grey Graphic T-Shirt",
+        "category": "top",
+        "subcategory": "t-shirt",
+        "primary_color": "grey",
+        "secondary_colors": [
+          "orange",
+          "red",
+          "green"
+        ],
+        "is_neutral": true,
+        "pattern": "graphic",
+        "material": "cotton",
+        "formality": 1,
+        "warmth": 2,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual"
+        ]
+      },
+      {
+        "name": "Olive Green Linen Shirt",
+        "category": "top",
+        "subcategory": "shirt",
+        "primary_color": "olive green",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "linen",
+        "formality": 3,
+        "warmth": 2,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "mid",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Burgundy Short-Sleeve Polo Shirt",
+        "category": "top",
+        "subcategory": "polo shirt",
+        "primary_color": "burgundy",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton pique",
+        "formality": 2,
+        "warmth": 2,
+        "seasonality": "spring-autumn",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "work"
+        ]
+      },
+      {
+        "name": "Black Crew Socks with White Stripes",
+        "category": "accessory",
+        "subcategory": "socks",
+        "primary_color": "black",
+        "secondary_colors": [
+          "white"
+        ],
+        "is_neutral": true,
+        "pattern": "striped",
+        "material": "cotton blend",
+        "formality": 1,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Minimalist Watch",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "stainless steel",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Black Athletic Sneakers",
+        "category": "shoes",
+        "subcategory": "sneakers",
+        "primary_color": "black",
+        "secondary_colors": [
+          "white",
+          "silver"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 2,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Braided Leather Belt",
+        "category": "accessory",
+        "subcategory": "belt",
+        "primary_color": "black",
+        "secondary_colors": [
+          "silver"
+        ],
+        "is_neutral": true,
+        "pattern": "other",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "outer",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Black Slide Sandals",
+        "category": "shoes",
+        "subcategory": "slides",
+        "primary_color": "black",
+        "secondary_colors": [
+          "grey"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "synthetic",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Elephant Print Tote Bag",
+        "category": "accessory",
+        "subcategory": "tote bag",
+        "primary_color": "grey",
+        "secondary_colors": [
+          "white",
+          "tan"
+        ],
+        "is_neutral": false,
+        "pattern": "printed",
+        "material": "canvas",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "outer",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Kids Character Light-Up Clog",
+        "category": "shoes",
+        "subcategory": "clog",
+        "primary_color": "navy",
+        "secondary_colors": [
+          "red",
+          "yellow"
+        ],
+        "is_neutral": false,
+        "pattern": "graphic",
+        "material": "foam",
+        "formality": 1,
+        "warmth": 2,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      }
+    ]
+  }
+}

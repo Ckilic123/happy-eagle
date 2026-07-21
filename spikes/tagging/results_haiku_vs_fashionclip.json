@@ -1,0 +1,1813 @@
+{
+  "truth": [
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "navy blue",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "bottom",
+      "subcategory": "jeans",
+      "primary_color": "blue",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "silver",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "bottom",
+      "subcategory": "track pants",
+      "primary_color": "black",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tshirts",
+      "primary_color": "grey",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tshirts",
+      "primary_color": "grey",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "green",
+      "seasonality": "summer",
+      "occasions": [
+        "formal"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "purple",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "socks",
+      "primary_color": "navy blue",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "black",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "casual shoes",
+      "primary_color": "black",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "belts",
+      "primary_color": "black",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "flip flops",
+      "primary_color": "black",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "handbags",
+      "primary_color": "blue",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "flip flops",
+      "primary_color": "navy blue",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "purple",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "work",
+        "formal"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "black",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tops",
+      "primary_color": "white",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "bra",
+      "primary_color": "beige",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "handbags",
+      "primary_color": "brown",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "black",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "sandals",
+      "primary_color": "black",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "shoe accessories",
+      "primary_color": "black",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "sweatshirts",
+      "primary_color": "grey",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "active"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "formal shoes",
+      "primary_color": "black",
+      "seasonality": "winter",
+      "occasions": [
+        "work",
+        "formal"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "bracelet",
+      "primary_color": "bronze",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tshirts",
+      "primary_color": "navy blue",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "active"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "handbags",
+      "primary_color": "brown",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "navy blue",
+      "seasonality": "summer",
+      "occasions": [
+        "work",
+        "formal"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tshirts",
+      "primary_color": "green",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "brown",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "casual shoes",
+      "primary_color": "white",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "flats",
+      "primary_color": "black",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "kurtas",
+      "primary_color": "green",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "formal"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "handbags",
+      "primary_color": "white",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "handbags",
+      "primary_color": "teal",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "copper",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "tshirts",
+      "primary_color": "pink",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "belts",
+      "primary_color": "black",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "work",
+        "formal"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "flats",
+      "primary_color": "brown",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "off white",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "kurtas",
+      "primary_color": "beige",
+      "seasonality": "summer",
+      "occasions": [
+        "formal"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "waistcoat",
+      "primary_color": "grey",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "sports shoes",
+      "primary_color": "white",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "active"
+      ]
+    },
+    {
+      "category": "bottom",
+      "subcategory": "shorts",
+      "primary_color": "black",
+      "seasonality": "summer",
+      "occasions": [
+        "active"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "briefs",
+      "primary_color": "maroon",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "top",
+      "subcategory": "shirts",
+      "primary_color": "red",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "work",
+        "formal"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "belts",
+      "primary_color": "black",
+      "seasonality": "summer",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "accessory",
+      "subcategory": "watches",
+      "primary_color": "white",
+      "seasonality": "winter",
+      "occasions": [
+        "casual"
+      ]
+    },
+    {
+      "category": "shoes",
+      "subcategory": "formal shoes",
+      "primary_color": "black",
+      "seasonality": "spring-autumn",
+      "occasions": [
+        "work",
+        "formal"
+      ]
+    }
+  ],
+  "preds": {
+    "claude-haiku": [
+      {
+        "name": "Plaid Button-Up Shirt",
+        "category": "top",
+        "subcategory": "casual shirt",
+        "primary_color": "blue",
+        "secondary_colors": [
+          "white",
+          "red"
+        ],
+        "is_neutral": false,
+        "pattern": "checked",
+        "material": "cotton",
+        "formality": 2,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "mid",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Dark Blue Jeans",
+        "category": "bottom",
+        "subcategory": "jeans",
+        "primary_color": "navy",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "denim",
+        "formality": 2,
+        "warmth": 3,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Silver Minimalist Watch",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "silver",
+        "secondary_colors": [
+          "white"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "stainless steel",
+        "formality": 4,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Black Straight Leg Jeans",
+        "category": "bottom",
+        "subcategory": "jeans",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "denim",
+        "formality": 2,
+        "warmth": 3,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out",
+          "active"
+        ]
+      },
+      {
+        "name": "Heathered Blue Crew Neck T-Shirt",
+        "category": "top",
+        "subcategory": "t-shirt",
+        "primary_color": "blue",
+        "secondary_colors": [
+          "grey"
+        ],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton blend",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Graphic T-shirt",
+        "category": "top",
+        "subcategory": "t-shirt",
+        "primary_color": "lavender",
+        "secondary_colors": [
+          "purple"
+        ],
+        "is_neutral": false,
+        "pattern": "graphic",
+        "material": "cotton",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Utility Shirt",
+        "category": "top",
+        "subcategory": "shirt",
+        "primary_color": "olive",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "cotton blend",
+        "formality": 2,
+        "warmth": 2,
+        "seasonality": "spring-autumn",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Classic Blue Denim Jacket",
+        "category": "outerwear",
+        "subcategory": "denim jacket",
+        "primary_color": "blue",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "denim",
+        "formality": 2,
+        "warmth": 3,
+        "seasonality": "spring-autumn",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "outer",
+        "occasions": [
+          "casual",
+          "going-out",
+          "work"
+        ]
+      },
+      {
+        "name": "Black Crew Socks with White Stripe",
+        "category": "accessory",
+        "subcategory": "socks",
+        "primary_color": "black",
+        "secondary_colors": [
+          "white"
+        ],
+        "is_neutral": true,
+        "pattern": "striped",
+        "material": "cotton blend",
+        "formality": 1,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Sports Watch",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "rubber",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Patent Leather Dress Shoe",
+        "category": "shoes",
+        "subcategory": "oxford",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "patent leather",
+        "formality": 5,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "outer",
+        "occasions": [
+          "work",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Black Leather Belt with Silver Buckle",
+        "category": "accessory",
+        "subcategory": "belt",
+        "primary_color": "black",
+        "secondary_colors": [
+          "silver"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Black Slide Sandals",
+        "category": "shoes",
+        "subcategory": "slides",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "rubber",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Floral Patterned Shoulder Bag",
+        "category": "accessory",
+        "subcategory": "handbag",
+        "primary_color": "blue",
+        "secondary_colors": [
+          "white",
+          "yellow",
+          "green"
+        ],
+        "is_neutral": false,
+        "pattern": "floral",
+        "material": "canvas",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Color-block Canvas Sneaker",
+        "category": "shoes",
+        "subcategory": "sneaker",
+        "primary_color": "navy",
+        "secondary_colors": [
+          "red",
+          "yellow"
+        ],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "canvas",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Dress Shirt",
+        "category": "top",
+        "subcategory": "dress shirt",
+        "primary_color": "burgundy",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton",
+        "formality": 4,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "tailored",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Black Sport Watch",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "black",
+        "secondary_colors": [
+          "grey",
+          "red"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "stainless steel",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active",
+          "work"
+        ]
+      },
+      {
+        "name": "Floral Print T-Shirt",
+        "category": "top",
+        "subcategory": "t-shirt",
+        "primary_color": "white",
+        "secondary_colors": [
+          "teal",
+          "green"
+        ],
+        "is_neutral": false,
+        "pattern": "floral",
+        "material": "cotton",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Beige Sleeveless Crop Top",
+        "category": "top",
+        "subcategory": "crop top",
+        "primary_color": "beige",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "cotton blend",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out",
+          "active"
+        ]
+      },
+      {
+        "name": "Brown Leather Bucket Bag",
+        "category": "accessory",
+        "subcategory": "handbag",
+        "primary_color": "brown",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "work",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Digital Sports Watch",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "black",
+        "secondary_colors": [
+          "silver"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "rubber, plastic, metal",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Brown Strappy Sandal",
+        "category": "shoes",
+        "subcategory": "sandal",
+        "primary_color": "brown",
+        "secondary_colors": [
+          "tan"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Brown Leather Clutch with Tassel",
+        "category": "accessory",
+        "subcategory": "clutch",
+        "primary_color": "brown",
+        "secondary_colors": [
+          "gold"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 4,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "going-out",
+          "formal",
+          "casual"
+        ]
+      },
+      {
+        "name": "Heathered Grey Zip-Up Hoodie",
+        "category": "top",
+        "subcategory": "hoodie",
+        "primary_color": "grey",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "cotton-blend",
+        "formality": 1,
+        "warmth": 3,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "mid",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Leather Oxford Shoe",
+        "category": "shoes",
+        "subcategory": "oxford",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 4,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "formal",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Gold Chain Bracelet",
+        "category": "accessory",
+        "subcategory": "bracelet",
+        "primary_color": "gold",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "metal",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out",
+          "formal",
+          "work"
+        ]
+      },
+      {
+        "name": "Graphic T-Shirt",
+        "category": "top",
+        "subcategory": "t-shirt",
+        "primary_color": "navy",
+        "secondary_colors": [
+          "white"
+        ],
+        "is_neutral": true,
+        "pattern": "graphic",
+        "material": "cotton",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Brown Leather Handbag",
+        "category": "accessory",
+        "subcategory": "handbag",
+        "primary_color": "brown",
+        "secondary_colors": [
+          "black"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Navy Button-Up Shirt",
+        "category": "top",
+        "subcategory": "dress shirt",
+        "primary_color": "navy",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "cotton",
+        "formality": 3,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Green Crew Neck T-Shirt",
+        "category": "top",
+        "subcategory": "t-shirt",
+        "primary_color": "green",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Burgundy Short-Sleeve Polo Shirt",
+        "category": "top",
+        "subcategory": "polo shirt",
+        "primary_color": "burgundy",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton-blend",
+        "formality": 3,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Red and White Sneaker",
+        "category": "shoes",
+        "subcategory": "sneaker",
+        "primary_color": "white",
+        "secondary_colors": [
+          "red"
+        ],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "canvas",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Strappy Flat Sandal",
+        "category": "shoes",
+        "subcategory": "sandal",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Yellow-Green Cap Sleeve T-Shirt Dress",
+        "category": "dress",
+        "subcategory": "t-shirt dress",
+        "primary_color": "lime green",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton jersey",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "loose",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Clear Shoulder Bag with Tan Trim",
+        "category": "accessory",
+        "subcategory": "handbag",
+        "primary_color": "clear",
+        "secondary_colors": [
+          "tan",
+          "beige"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "clear plastic with leather trim",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Teal Structured Handbag",
+        "category": "accessory",
+        "subcategory": "handbag",
+        "primary_color": "teal",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out",
+          "work"
+        ]
+      },
+      {
+        "name": "Stainless Steel Link Watch with Blue Dial",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "silver",
+        "secondary_colors": [
+          "blue",
+          "black"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "stainless steel",
+        "formality": 4,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Pink Graphic T-Shirt",
+        "category": "top",
+        "subcategory": "t-shirt",
+        "primary_color": "pink",
+        "secondary_colors": [
+          "white",
+          "purple"
+        ],
+        "is_neutral": false,
+        "pattern": "graphic",
+        "material": "cotton",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Leather Belt",
+        "category": "accessory",
+        "subcategory": "belt",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Patterned Slip-On Loafer",
+        "category": "shoes",
+        "subcategory": "loafer",
+        "primary_color": "burgundy",
+        "secondary_colors": [
+          "navy",
+          "tan"
+        ],
+        "is_neutral": false,
+        "pattern": "printed",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "statement",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Analog Wristwatch with Silver Case",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "silver",
+        "secondary_colors": [
+          "white",
+          "black"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "metal, leather",
+        "formality": 4,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Printed Shift Dress",
+        "category": "dress",
+        "subcategory": "shift dress",
+        "primary_color": "pink",
+        "secondary_colors": [
+          "white"
+        ],
+        "is_neutral": false,
+        "pattern": "printed",
+        "material": "cotton blend",
+        "formality": 2,
+        "warmth": 1,
+        "seasonality": "summer",
+        "silhouette": "loose",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Charcoal Wool Blend Suit Vest",
+        "category": "top",
+        "subcategory": "vest",
+        "primary_color": "charcoal",
+        "secondary_colors": [
+          "black"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "wool blend",
+        "formality": 4,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "tailored",
+        "visual_weight": "neutral",
+        "layer_role": "mid",
+        "occasions": [
+          "work",
+          "formal",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Colorblock Athletic Sneaker",
+        "category": "shoes",
+        "subcategory": "sneaker",
+        "primary_color": "white",
+        "secondary_colors": [
+          "navy",
+          "black"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "synthetic leather and mesh",
+        "formality": 1,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Black Capri Pants",
+        "category": "bottom",
+        "subcategory": "capris",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "cotton blend",
+        "formality": 2,
+        "warmth": 2,
+        "seasonality": "summer",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual",
+          "active"
+        ]
+      },
+      {
+        "name": "Burgundy Low-Rise Brief",
+        "category": "accessory",
+        "subcategory": "underwear",
+        "primary_color": "burgundy",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton blend",
+        "formality": 1,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "casual"
+        ]
+      },
+      {
+        "name": "Long-sleeve Button-up Shirt",
+        "category": "top",
+        "subcategory": "dress shirt",
+        "primary_color": "mauve",
+        "secondary_colors": [],
+        "is_neutral": false,
+        "pattern": "solid",
+        "material": "cotton blend",
+        "formality": 3,
+        "warmth": 2,
+        "seasonality": "spring-autumn",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out"
+        ]
+      },
+      {
+        "name": "Black Leather Belt",
+        "category": "accessory",
+        "subcategory": "belt",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 3,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "mid",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Rectangular Watch with Black Leather Strap",
+        "category": "accessory",
+        "subcategory": "watch",
+        "primary_color": "silver",
+        "secondary_colors": [
+          "black"
+        ],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather and stainless steel",
+        "formality": 4,
+        "warmth": 1,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "versatile",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "casual",
+          "going-out",
+          "formal"
+        ]
+      },
+      {
+        "name": "Black Leather Oxford Shoe",
+        "category": "shoes",
+        "subcategory": "oxford",
+        "primary_color": "black",
+        "secondary_colors": [],
+        "is_neutral": true,
+        "pattern": "solid",
+        "material": "leather",
+        "formality": 4,
+        "warmth": 2,
+        "seasonality": "all-season",
+        "silhouette": "regular",
+        "visual_weight": "neutral",
+        "layer_role": "base",
+        "occasions": [
+          "work",
+          "formal",
+          "going-out"
+        ]
+      }
+    ],
+    "fashionclip": [
+      {
+        "category": "top",
+        "pattern": "checked",
+        "primary_color": "navy"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "blue"
+      },
+      {
+        "category": "accessory",
+        "pattern": "checked",
+        "primary_color": "white"
+      },
+      {
+        "category": "top",
+        "pattern": "graphic",
+        "primary_color": "black"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "grey"
+      },
+      {
+        "category": "top",
+        "pattern": "graphic",
+        "primary_color": "grey"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "green"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "purple"
+      },
+      {
+        "category": "accessory",
+        "pattern": "striped",
+        "primary_color": "navy"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "shoes",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "blue"
+      },
+      {
+        "category": "accessory",
+        "pattern": "floral",
+        "primary_color": "blue"
+      },
+      {
+        "category": "shoes",
+        "pattern": "solid",
+        "primary_color": "navy"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "purple"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "top",
+        "pattern": "floral",
+        "primary_color": "green"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "beige"
+      },
+      {
+        "category": "accessory",
+        "pattern": "striped",
+        "primary_color": "brown"
+      },
+      {
+        "category": "top",
+        "pattern": "graphic",
+        "primary_color": "black"
+      },
+      {
+        "category": "shoes",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "grey"
+      },
+      {
+        "category": "shoes",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "yellow"
+      },
+      {
+        "category": "top",
+        "pattern": "striped",
+        "primary_color": "navy"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "brown"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "navy"
+      },
+      {
+        "category": "top",
+        "pattern": "graphic",
+        "primary_color": "green"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "brown"
+      },
+      {
+        "category": "shoes",
+        "pattern": "graphic",
+        "primary_color": "white"
+      },
+      {
+        "category": "shoes",
+        "pattern": "graphic",
+        "primary_color": "black"
+      },
+      {
+        "category": "dress",
+        "pattern": "solid",
+        "primary_color": "green"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "white"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "green"
+      },
+      {
+        "category": "top",
+        "pattern": "graphic",
+        "primary_color": "navy"
+      },
+      {
+        "category": "top",
+        "pattern": "graphic",
+        "primary_color": "pink"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "shoes",
+        "pattern": "graphic",
+        "primary_color": "brown"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "white"
+      },
+      {
+        "category": "dress",
+        "pattern": "printed",
+        "primary_color": "pink"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "green"
+      },
+      {
+        "category": "shoes",
+        "pattern": "graphic",
+        "primary_color": "white"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "bottom",
+        "pattern": "solid",
+        "primary_color": "purple"
+      },
+      {
+        "category": "top",
+        "pattern": "solid",
+        "primary_color": "pink"
+      },
+      {
+        "category": "accessory",
+        "pattern": "solid",
+        "primary_color": "black"
+      },
+      {
+        "category": "accessory",
+        "pattern": "striped",
+        "primary_color": "grey"
+      },
+      {
+        "category": "shoes",
+        "pattern": "solid",
+        "primary_color": "grey"
+      }
+    ]
+  }
+}

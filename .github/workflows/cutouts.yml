@@ -1,0 +1,39 @@
+name: Background cutouts
+
+# Free compute: turns new wardrobe photos into transparent cutouts with rembg.
+on:
+  schedule:
+    - cron: '*/10 * * * *' # every ~10 minutes
+  workflow_dispatch: {} # and a "Run workflow" button
+
+concurrency:
+  group: cutouts
+  cancel-in-progress: false
+
+jobs:
+  cutouts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      # Cache the U^2-Net model (~176MB) so later runs skip the download.
+      - name: Cache rembg model
+        uses: actions/cache@v4
+        with:
+          path: ~/.u2net
+          key: u2net-model-v1
+
+      - name: Install dependencies
+        run: pip install rembg onnxruntime supabase
+
+      - name: Create cutouts
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python scripts/cutouts.py
