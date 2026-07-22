@@ -6,6 +6,7 @@ import { ActivityIndicator, Alert, Dimensions, FlatList, Pressable, ScrollView, 
 import { type Item, listItems } from '@/lib/items';
 import { suggestOutfit } from '@/lib/suggest';
 import { Button } from '@/ui/Button';
+import { WornOutfit } from '@/ui/DressingRoom';
 import { Screen } from '@/ui/Screen';
 import { Text } from '@/ui/Text';
 import { colors, radius, space } from '@/ui/theme';
@@ -101,12 +102,22 @@ export default function OutfitBuilder() {
               <Text variant="body">{outfit.why}</Text>
               <Text variant="caption">{outfit.tip}</Text>
             </View>
-            {outfit.items.map((item) => (
-              <OutfitPiece key={item.id} item={item} />
-            ))}
+            {outfit.items.some((i) => i.hasCutout) ? (
+              <WornOutfit
+                items={outfit.items}
+                height={Math.min(Dimensions.get('window').height * 0.52, 520)}
+              />
+            ) : (
+              // No cutouts yet (the worker runs on a schedule) — fall back to cards.
+              outfit.items.map((item) => <OutfitPiece key={item.id} item={item} />)
+            )}
           </ScrollView>
           <View style={{ paddingTop: space.md, gap: space.sm }}>
-            <Button label={styling ? 'Styling…' : 'Style me again'} onPress={onStyleMe} disabled={styling} />
+            <Button
+              label={styling ? 'Styling…' : 'Style me again'}
+              onPress={onStyleMe}
+              disabled={styling}
+            />
             <Button label="Back to browsing" variant="secondary" onPress={() => setOutfit(null)} />
           </View>
         </>
@@ -122,7 +133,11 @@ export default function OutfitBuilder() {
             ))}
           </ScrollView>
           <View style={{ paddingTop: space.md }}>
-            <Button label={styling ? 'Styling…' : 'Style me'} onPress={onStyleMe} disabled={styling} />
+            <Button
+              label={styling ? 'Styling…' : 'Style me'}
+              onPress={onStyleMe}
+              disabled={styling}
+            />
           </View>
         </>
       )}
