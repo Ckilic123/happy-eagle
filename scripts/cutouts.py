@@ -13,7 +13,7 @@ import io
 import os
 import sys
 
-from PIL import Image
+from PIL import Image, ImageOps
 from rembg import new_session, remove
 from supabase import create_client
 
@@ -22,18 +22,20 @@ BATCH = 25  # keep each run short
 MARGIN = 0.02  # breathing room around the garment, as a fraction of its size
 
 
-def trim(png: bytes) -> bytes:
+def trim(im: Image.Image) -> bytes:
     """Crop a cutout down to the garment itself.
 
     rembg returns the *original* frame with the background made transparent, so the
-    garment sits at an arbitrary size and offset inside a 3:4 rectangle. Layouts that
+    garment sits at an arbitrary size and offset inside a rectangle. Layouts that
     place garments on a body need the image to *be* the garment, so trim to the alpha
     bounding box. Without this every piece floats at a random scale.
     """
-    im = Image.open(io.BytesIO(png)).convert("RGBA")
+    im = im.convert("RGBA")
     box = im.getbbox()  # None when fully transparent (segmentation found nothing)
     if not box:
-        return png
+        out = io.BytesIO()
+        im.save(out, format="PNG")
+        return out.getvalue()
     left, top, right, bottom = box
     mx = round((right - left) * MARGIN)
     my = round((bottom - top) * MARGIN)
@@ -78,8 +80,14 @@ def main() -> int:
     for row in pending:
         item_id = row["id"]
         try:
-            original = sb.storage.from_(BUCKET).download(row["image_original"])
-            cutout = trim(remove(original, session=session))  # transparent PNG, garment-tight
+            raw = sb.storage.from_(BUCKET).download(row["image_original"])
+            # Honor the phone's EXIF rotation flag by baking it into the pixels.
+            # PIL (and therefore rembg) ignores that flag, so without this a photo
+            # stored sideways-with-a-flag is cut out sideways — and the resulting PNG
+            # can't carry the flag to correct it. Claude and most photo viewers apply
+            # the flag, so this is what makes the cutout agree with them.
+            img = ImageOps.exif_transpose(Image.open(io.BytesIO(raw)))
+            cutout = trim(remove(img, session=session))  # transparent PNG, garment-tight, upright
 
             path = f"{row['user_id']}/cutout-{item_id}.png"
             sb.storage.from_(BUCKET).upload(
