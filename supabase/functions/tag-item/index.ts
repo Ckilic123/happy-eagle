@@ -22,12 +22,15 @@ const SYSTEM =
   `- silhouette: slim | regular | loose | oversized | tailored.\n` +
   `- layer_role: base | mid | outer.\n` +
   `- occasions: any of work, casual, going-out, active, formal.\n` +
-  `- upright_direction: which way the TOP of the garment points in this photo — up, ` +
-  `right, down or left. The top is the collar on a shirt, the waistband on trousers ` +
-  `or a skirt, the shoulders on a dress or coat, the ankle opening on a shoe, the ` +
-  `handle on a bag. Judge the garment itself, not the shape of the photo: a wide ` +
-  `photo of an upright shirt is still 'up'. Answer 'up' unless the garment is ` +
-  `clearly lying on its side or upside down.\n` +
+  `The garment's TOP is the collar on a shirt, the waistband on trousers or a skirt, ` +
+  `the shoulders on a dress or coat, the ankle opening on a shoe, the handle on a bag. ` +
+  `Its BOTTOM is the opposite end: hem, cuffs, sole, base.\n` +
+  `- orientation_note: one short sentence locating both ends in the frame, e.g. ` +
+  `"collar near the left edge, hem near the right edge". Describe what you see; do ` +
+  `not assume the garment is upright.\n` +
+  `- top_edge: which edge of the photo the garment's TOP lies nearest — top, right, ` +
+  `bottom or left. Must agree with orientation_note. Judge the garment, not the shape ` +
+  `of the photo: a wide photo of an upright shirt still has top_edge 'top'.\n` +
   `Use plain-English colours (e.g. 'navy'). Output only the fields.`;
 
 const SCHEMA = {
@@ -49,24 +52,27 @@ const SCHEMA = {
     visual_weight: { type: 'string', enum: ['neutral', 'versatile', 'statement'] },
     layer_role: { type: 'string', enum: ['base', 'mid', 'outer'] },
     occasions: { type: 'array', items: { type: 'string' } },
-    upright_direction: { type: 'string', enum: ['up', 'right', 'down', 'left'] },
+    // Order matters: the note is generated before top_edge, so the model has to
+    // locate the collar in words before committing to an answer.
+    orientation_note: { type: 'string' },
+    top_edge: { type: 'string', enum: ['top', 'right', 'bottom', 'left'] },
   },
   required: [
     'name', 'category', 'subcategory', 'primary_color', 'secondary_colors', 'is_neutral',
     'pattern', 'material', 'formality', 'warmth', 'seasonality', 'silhouette',
-    'visual_weight', 'layer_role', 'occasions', 'upright_direction',
+    'visual_weight', 'layer_role', 'occasions', 'orientation_note', 'top_edge',
   ],
 };
 
 /**
- * Where the garment's top currently points → degrees to turn the photo clockwise.
+ * Which edge the garment's top lies nearest → degrees to turn the photo clockwise.
  *
- * Asking the model for the rotation directly invited a sign flip: it would see the
- * garment was sideways and still pick the wrong way round. Asking which way the
- * collar points is a plain observation, and the arithmetic belongs here anyway.
- * Clockwise carries left→up (90) and right→up (270), not the other way about.
+ * Asking for the rotation directly invited a sign flip: the model saw the garment
+ * was sideways and still picked the wrong way round. Asking where the collar *is*
+ * is a plain observation; the arithmetic belongs here, written down once.
+ * Clockwise carries left→top (90) and right→top (270), not the other way about.
  */
-const ROTATION_FOR: Record<string, number> = { up: 0, left: 90, down: 180, right: 270 };
+const ROTATION_FOR: Record<string, number> = { top: 0, left: 90, bottom: 180, right: 270 };
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -126,9 +132,9 @@ Deno.serve(async (req) => {
     // deno-lint-ignore no-explicit-any
     const textBlock = (msg.content as any[]).find((b) => b.type === 'text');
     if (!textBlock) return json({ error: 'No tags returned' }, 502);
-    const { upright_direction, ...tags } = JSON.parse(textBlock.text);
-    // upright_direction is a prompt-only field; the row stores degrees.
-    const rotation = ROTATION_FOR[upright_direction] ?? 0;
+    // Both are prompt-only fields — the row stores degrees.
+    const { orientation_note, top_edge, ...tags } = JSON.parse(textBlock.text);
+    const rotation = ROTATION_FOR[top_edge] ?? 0;
 
     const { error: upErr } = await supabase
       .from('items')
@@ -136,7 +142,8 @@ Deno.serve(async (req) => {
       .eq('id', itemId);
     if (upErr) return json({ error: upErr.message }, 500);
 
-    return json({ tags: { ...tags, rotation } });
+    // Echo the reasoning so a wrong turn can be diagnosed without re-running.
+    return json({ tags: { ...tags, rotation }, orientation: { orientation_note, top_edge } });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : 'Unknown error' }, 500);
   }
