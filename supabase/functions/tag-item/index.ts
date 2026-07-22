@@ -22,10 +22,12 @@ const SYSTEM =
   `- silhouette: slim | regular | loose | oversized | tailored.\n` +
   `- layer_role: base | mid | outer.\n` +
   `- occasions: any of work, casual, going-out, active, formal.\n` +
-  `- rotation: degrees the photo must be turned CLOCKWISE for the garment to stand ` +
-  `upright — collar/waistband at the top, hem at the bottom. 0 if already upright, ` +
-  `90 if the garment currently points right, 270 if it points left, 180 if upside down. ` +
-  `Judge by the garment, not the frame: a shoe photographed from the side is upright.\n` +
+  `- upright_direction: which way the TOP of the garment points in this photo — up, ` +
+  `right, down or left. The top is the collar on a shirt, the waistband on trousers ` +
+  `or a skirt, the shoulders on a dress or coat, the ankle opening on a shoe, the ` +
+  `handle on a bag. Judge the garment itself, not the shape of the photo: a wide ` +
+  `photo of an upright shirt is still 'up'. Answer 'up' unless the garment is ` +
+  `clearly lying on its side or upside down.\n` +
   `Use plain-English colours (e.g. 'navy'). Output only the fields.`;
 
 const SCHEMA = {
@@ -47,14 +49,24 @@ const SCHEMA = {
     visual_weight: { type: 'string', enum: ['neutral', 'versatile', 'statement'] },
     layer_role: { type: 'string', enum: ['base', 'mid', 'outer'] },
     occasions: { type: 'array', items: { type: 'string' } },
-    rotation: { type: 'integer', enum: [0, 90, 180, 270] },
+    upright_direction: { type: 'string', enum: ['up', 'right', 'down', 'left'] },
   },
   required: [
     'name', 'category', 'subcategory', 'primary_color', 'secondary_colors', 'is_neutral',
     'pattern', 'material', 'formality', 'warmth', 'seasonality', 'silhouette',
-    'visual_weight', 'layer_role', 'occasions', 'rotation',
+    'visual_weight', 'layer_role', 'occasions', 'upright_direction',
   ],
 };
+
+/**
+ * Where the garment's top currently points → degrees to turn the photo clockwise.
+ *
+ * Asking the model for the rotation directly invited a sign flip: it would see the
+ * garment was sideways and still pick the wrong way round. Asking which way the
+ * collar points is a plain observation, and the arithmetic belongs here anyway.
+ * Clockwise carries left→up (90) and right→up (270), not the other way about.
+ */
+const ROTATION_FOR: Record<string, number> = { up: 0, left: 90, down: 180, right: 270 };
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -114,15 +126,17 @@ Deno.serve(async (req) => {
     // deno-lint-ignore no-explicit-any
     const textBlock = (msg.content as any[]).find((b) => b.type === 'text');
     if (!textBlock) return json({ error: 'No tags returned' }, 502);
-    const tags = JSON.parse(textBlock.text);
+    const { upright_direction, ...tags } = JSON.parse(textBlock.text);
+    // upright_direction is a prompt-only field; the row stores degrees.
+    const rotation = ROTATION_FOR[upright_direction] ?? 0;
 
     const { error: upErr } = await supabase
       .from('items')
-      .update({ ...tags, updated_at: new Date().toISOString() })
+      .update({ ...tags, rotation, updated_at: new Date().toISOString() })
       .eq('id', itemId);
     if (upErr) return json({ error: upErr.message }, 500);
 
-    return json({ tags });
+    return json({ tags: { ...tags, rotation } });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : 'Unknown error' }, 500);
   }
