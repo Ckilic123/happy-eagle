@@ -135,6 +135,8 @@ Deno.serve(async (req) => {
     // Both are prompt-only fields — the row stores degrees.
     const { orientation_note, top_edge, ...tags } = JSON.parse(textBlock.text);
     const rotation = ROTATION_FOR[top_edge] ?? 0;
+    // Shows up in Supabase → Edge Functions → tag-item → Logs.
+    console.log(`orientation: top_edge=${top_edge} rotation=${rotation} — ${orientation_note}`);
 
     const { error: upErr } = await supabase
       .from('items')
