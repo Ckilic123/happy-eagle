@@ -4,7 +4,12 @@ name: Background cutouts
 on:
   schedule:
     - cron: '*/10 * * * *' # every ~10 minutes
-  workflow_dispatch: {} # and a "Run workflow" button
+  workflow_dispatch: # and a "Run workflow" button
+    inputs:
+      reprocess:
+        description: 'Re-cut items that already have a cutout'
+        type: boolean
+        default: false
 
 concurrency:
   group: cutouts
@@ -36,4 +41,5 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          REPROCESS: ${{ inputs.reprocess && '1' || '0' }}
         run: python scripts/cutouts.py
