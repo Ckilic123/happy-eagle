@@ -2,7 +2,14 @@ import { type Href, router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { ActivityIndicator, Alert, FlatList, Pressable, View } from 'react-native';
 
-import { addItemsFromLibrary, deleteItems, type Item, listItems, tagItem } from '@/lib/items';
+import {
+  addItemsFromLibrary,
+  deleteItems,
+  type Item,
+  listItems,
+  rotateItems,
+  tagItem,
+} from '@/lib/items';
 import { Button } from '@/ui/Button';
 import { ItemTile } from '@/ui/ItemTile';
 import { Screen } from '@/ui/Screen';
@@ -71,6 +78,16 @@ export default function Wardrobe() {
     } finally {
       setStatus(null);
       setAdding(false);
+    }
+  }
+
+  /** Quarter-turn the selection. Stays in selection mode so it can be tapped again. */
+  async function onRotate() {
+    try {
+      await rotateItems([...selected], items);
+      await load();
+    } catch (e) {
+      Alert.alert('Could not rotate', e instanceof Error ? e.message : 'Please try again.');
     }
   }
 
@@ -153,7 +170,9 @@ export default function Wardrobe() {
       <View style={{ paddingTop: space.md, gap: space.sm }}>
         {selecting ? (
           <>
-            {untagged.length > 0 ? (
+            {selected.size > 0 ? (
+              <Button label="Rotate ↻" variant="secondary" onPress={onRotate} />
+            ) : untagged.length > 0 ? (
               <Button
                 label={`Select ${untagged.length} untagged`}
                 variant="secondary"

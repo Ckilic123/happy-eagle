@@ -1,10 +1,10 @@
-import { Image } from 'expo-image';
 import { useState } from 'react';
 import { View } from 'react-native';
 
 import type { Item } from '@/lib/items';
 
 import { FIGURE_ASPECT, Figure } from './Figure';
+import { GarmentImage } from './GarmentImage';
 import { Text } from './Text';
 import { colors, radius, space } from './theme';
 
@@ -120,22 +120,25 @@ function Garment({
   const [aspect, setAspect] = useState<number | null>(null);
   if (!slot || !item.imageUrl) return null;
 
+  // A quarter-turn swaps the garment's proportions, so a sideways photo of jeans
+  // hangs as tall jeans rather than as a wide box.
+  const natural = aspect ?? slot.fallbackAspect;
+  const quarterTurned = item.rotation === 90 || item.rotation === 270;
   const w = slot.w * figureHeight;
-  const h = w / (aspect ?? slot.fallbackAspect);
+  const h = w / (quarterTurned ? 1 / natural : natural);
   const left = (figureWidth - w) / 2 + (slot.dx ?? 0) * figureHeight;
   const top =
     slot.bottom !== undefined ? figureHeight - slot.bottom * figureHeight - h : slot.top! * figureHeight;
 
   return (
-    <Image
-      source={{ uri: item.imageUrl }}
-      style={{ position: 'absolute', left, top, width: w, height: h, zIndex: slot.z }}
-      contentFit="contain"
+    <GarmentImage
+      uri={item.imageUrl}
+      rotation={item.rotation}
+      width={w}
+      height={h}
       transition={180}
-      onLoad={(e) => {
-        const { width, height } = e.source;
-        if (width && height) setAspect(width / height);
-      }}
+      style={{ position: 'absolute', left, top, width: w, height: h, zIndex: slot.z }}
+      onNaturalSize={({ width, height }) => setAspect(width / height)}
     />
   );
 }

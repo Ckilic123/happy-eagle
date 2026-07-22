@@ -13,6 +13,7 @@ export type Item = {
   image_cutout: string | null;
   imageUrl: string | null; // signed URL for display
   hasCutout: boolean; // true once background removal has run
+  rotation: number; // degrees clockwise to stand the garment upright (0/90/180/270)
 };
 
 const BUCKET = 'wardrobe';
@@ -40,7 +41,7 @@ export async function listItems(): Promise<Item[]> {
   const userId = await requireUserId();
   const { data, error } = await supabase
     .from('items')
-    .select('id, name, category, primary_color, image_original, image_cutout')
+    .select('id, name, category, primary_color, image_original, image_cutout, rotation')
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
   if (error) throw error;
@@ -64,8 +65,25 @@ export async function listItems(): Promise<Item[]> {
       ...r,
       imageUrl: p ? (urlByPath.get(p) ?? null) : null,
       hasCutout: !!r.image_cutout,
+      rotation: r.rotation ?? 0,
     };
   });
+}
+
+/** Turn items a quarter-turn clockwise — the manual fix when the Cataloguer guesses wrong. */
+export async function rotateItems(ids: string[], items: Item[]): Promise<void> {
+  if (!ids.length) return;
+  const userId = await requireUserId();
+  const byId = new Map(items.map((i) => [i.id, i]));
+  await Promise.all(
+    ids.map((id) =>
+      supabase
+        .from('items')
+        .update({ rotation: (((byId.get(id)?.rotation ?? 0) + 90) % 360) })
+        .eq('user_id', userId)
+        .eq('id', id),
+    ),
+  );
 }
 
 /**

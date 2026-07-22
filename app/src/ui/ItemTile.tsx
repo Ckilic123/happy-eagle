@@ -1,8 +1,8 @@
-import { Image } from 'expo-image';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import type { Item } from '@/lib/items';
 
+import { GarmentImage } from './GarmentImage';
 import { Text } from './Text';
 import { colors, radius, space } from './theme';
 
@@ -37,15 +37,13 @@ export function ItemTile({
           selected && styles.selected,
         ]}
       >
-        {item.imageUrl ? (
-          <Image
-            source={{ uri: item.imageUrl }}
-            style={styles.image}
-            // Cutouts float on the tile; raw photos fill it.
-            contentFit={item.hasCutout ? 'contain' : 'cover'}
-            transition={150}
-          />
-        ) : null}
+        <GarmentImage
+          uri={item.imageUrl}
+          rotation={item.rotation}
+          // Cutouts float on the tile; raw photos fill it.
+          contentFit={item.hasCutout ? 'contain' : 'cover'}
+          style={styles.image}
+        />
         {selecting ? (
           <View style={[styles.mark, selected && styles.markOn]}>
             {selected ? <Text style={styles.tick}>✓</Text> : null}

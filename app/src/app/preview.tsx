@@ -80,7 +80,8 @@ export default function Preview() {
 
 /** The wardrobe grid mid-selection — the real ItemTile and Button, not a mock-up. */
 function SelectionGrid() {
-  const tiles = FIXTURE_ITEMS.slice(0, 4);
+  // Last two are the sideways-jeans pair — corrected vs not.
+  const tiles = [FIXTURE_ITEMS[0], FIXTURE_ITEMS[1], ...FIXTURE_ITEMS.slice(-2)];
   const chosen = new Set([tiles[0].id, tiles[2].id]);
   return (
     <View style={{ gap: space.md }}>

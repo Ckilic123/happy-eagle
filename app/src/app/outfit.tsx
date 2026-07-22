@@ -1,4 +1,3 @@
-import { Image } from 'expo-image';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { ActivityIndicator, Alert, Dimensions, FlatList, Pressable, ScrollView, View } from 'react-native';
@@ -7,6 +6,7 @@ import { type Item, listItems } from '@/lib/items';
 import { suggestOutfit } from '@/lib/suggest';
 import { Button } from '@/ui/Button';
 import { WornOutfit } from '@/ui/DressingRoom';
+import { GarmentImage } from '@/ui/GarmentImage';
 import { Screen } from '@/ui/Screen';
 import { Text } from '@/ui/Text';
 import { colors, radius, space } from '@/ui/theme';
@@ -152,14 +152,12 @@ function OutfitPiece({ item }: { item: Item }) {
   return (
     <View style={{ gap: space.sm }}>
       <View style={[styles.card, { aspectRatio: 3 / 4 }, item.hasCutout && { padding: space.lg }]}>
-        {item.imageUrl ? (
-          <Image
-            source={{ uri: item.imageUrl }}
-            style={{ flex: 1 }}
-            contentFit={item.hasCutout ? 'contain' : 'cover'}
-            transition={150}
-          />
-        ) : null}
+        <GarmentImage
+          uri={item.imageUrl}
+          rotation={item.rotation}
+          contentFit={item.hasCutout ? 'contain' : 'cover'}
+          style={{ flex: 1 }}
+        />
       </View>
       <Text variant="label">{item.name ?? 'Item'}</Text>
       {item.primary_color ? <Text variant="caption">{item.primary_color}</Text> : null}
@@ -200,14 +198,12 @@ function Reel({ label, items }: { label: string; items: Item[] }) {
               item.hasCutout && { padding: space.md },
             ]}
           >
-            {item.imageUrl ? (
-              <Image
-                source={{ uri: item.imageUrl }}
-                style={{ flex: 1 }}
-                contentFit={item.hasCutout ? 'contain' : 'cover'}
-                transition={150}
-              />
-            ) : null}
+            <GarmentImage
+              uri={item.imageUrl}
+              rotation={item.rotation}
+              contentFit={item.hasCutout ? 'contain' : 'cover'}
+              style={{ flex: 1 }}
+            />
           </View>
         )}
       />

@@ -49,6 +49,17 @@ const BLAZER = svg(
    <path d="M144 10 L110 82 L128 98 L160 26 Z" fill="#5B5A43"/>`,
 );
 
+// The same jeans photographed on their side: a 300x130 frame with the garment lying
+// left-to-right. Tagged rotation=90, so a correct renderer stands it back up.
+const JEANS_SIDEWAYS = svg(
+  300,
+  130,
+  `<g transform="translate(0,130) rotate(-90)">
+     <path d="M4 2 L126 2 L120 120 L114 296 L76 296 L68 160 L62 160 L54 296 L16 296 L10 120 Z" fill="#4A5A72"/>
+     <path d="M4 2 L126 2 L125 18 L5 18 Z" fill="#3C4A5E"/>
+   </g>`,
+);
+
 const SNEAKERS = svg(
   220,
   100,
@@ -70,7 +81,14 @@ const BAG = svg(
    <path d="M8 42 L102 42 L101 56 L9 56 Z" fill="#8A6A49"/>`,
 );
 
-function item(id: string, name: string, category: string, color: string, uri: string): Item {
+function item(
+  id: string,
+  name: string,
+  category: string,
+  color: string,
+  uri: string,
+  rotation = 0,
+): Item {
   return {
     id,
     name,
@@ -80,6 +98,7 @@ function item(id: string, name: string, category: string, color: string, uri: st
     image_cutout: `fixture/${id}.png`,
     imageUrl: uri,
     hasCutout: true,
+    rotation,
   };
 }
 
@@ -90,6 +109,8 @@ export const FIXTURE_ITEMS: Item[] = [
   item('fx-blazer', 'Relaxed blazer', 'outerwear', 'olive', BLAZER),
   item('fx-sneakers', 'Leather sneakers', 'shoes', 'white', SNEAKERS),
   item('fx-bag', 'Shoulder bag', 'accessory', 'tan', BAG),
+  item('fx-jeans-side', 'Sideways jeans', 'bottom', 'indigo', JEANS_SIDEWAYS, 90),
+  item('fx-jeans-raw', 'Uncorrected jeans', 'bottom', 'indigo', JEANS_SIDEWAYS, 0),
 ];
 
 const pick = (...ids: string[]) => ids.map((id) => FIXTURE_ITEMS.find((i) => i.id === id)!);
@@ -99,4 +120,7 @@ export const FIXTURE_SETS: Record<string, Item[]> = {
   layered: pick('fx-tee', 'fx-jeans', 'fx-blazer', 'fx-sneakers', 'fx-bag'),
   dress: pick('fx-dress', 'fx-sneakers', 'fx-bag'),
   bare: pick(),
+  // Same sideways photo, corrected vs not — the rotation regression check.
+  rotated: pick('fx-tee', 'fx-jeans-side', 'fx-sneakers'),
+  unrotated: pick('fx-tee', 'fx-jeans-raw', 'fx-sneakers'),
 };

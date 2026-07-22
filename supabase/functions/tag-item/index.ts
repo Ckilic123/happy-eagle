@@ -22,6 +22,10 @@ const SYSTEM =
   `- silhouette: slim | regular | loose | oversized | tailored.\n` +
   `- layer_role: base | mid | outer.\n` +
   `- occasions: any of work, casual, going-out, active, formal.\n` +
+  `- rotation: degrees the photo must be turned CLOCKWISE for the garment to stand ` +
+  `upright — collar/waistband at the top, hem at the bottom. 0 if already upright, ` +
+  `90 if the garment currently points right, 270 if it points left, 180 if upside down. ` +
+  `Judge by the garment, not the frame: a shoe photographed from the side is upright.\n` +
   `Use plain-English colours (e.g. 'navy'). Output only the fields.`;
 
 const SCHEMA = {
@@ -43,11 +47,12 @@ const SCHEMA = {
     visual_weight: { type: 'string', enum: ['neutral', 'versatile', 'statement'] },
     layer_role: { type: 'string', enum: ['base', 'mid', 'outer'] },
     occasions: { type: 'array', items: { type: 'string' } },
+    rotation: { type: 'integer', enum: [0, 90, 180, 270] },
   },
   required: [
     'name', 'category', 'subcategory', 'primary_color', 'secondary_colors', 'is_neutral',
     'pattern', 'material', 'formality', 'warmth', 'seasonality', 'silhouette',
-    'visual_weight', 'layer_role', 'occasions',
+    'visual_weight', 'layer_role', 'occasions', 'rotation',
   ],
 };
 
