@@ -155,7 +155,7 @@ function OutfitPiece({ item }: { item: Item }) {
         <GarmentImage
           uri={item.imageUrl}
           rotation={item.rotation}
-          contentFit={item.hasCutout ? 'contain' : 'cover'}
+          contentFit="contain"
           style={{ flex: 1 }}
         />
       </View>
@@ -201,7 +201,7 @@ function Reel({ label, items }: { label: string; items: Item[] }) {
             <GarmentImage
               uri={item.imageUrl}
               rotation={item.rotation}
-              contentFit={item.hasCutout ? 'contain' : 'cover'}
+              contentFit="contain"
               style={{ flex: 1 }}
             />
           </View>

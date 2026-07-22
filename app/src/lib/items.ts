@@ -18,16 +18,6 @@ export type Item = {
 
 const BUCKET = 'wardrobe';
 
-/** Center-crop rectangle for a target aspect (width / height). */
-function centerCropRect(w: number, h: number, aspect: number) {
-  if (w / h > aspect) {
-    const cw = Math.round(h * aspect);
-    return { originX: Math.round((w - cw) / 2), originY: 0, width: cw, height: h };
-  }
-  const ch = Math.round(w / aspect);
-  return { originX: 0, originY: Math.round((h - ch) / 2), width: w, height: ch };
-}
-
 async function requireUserId(): Promise<string> {
   const {
     data: { user },
@@ -106,13 +96,13 @@ export async function addItemsFromLibrary(): Promise<string[]> {
 
   for (let i = 0; i < result.assets.length; i++) {
     const asset = result.assets[i];
-    // 1) Normalise orientation + resize down (re-encoding bakes in rotation).
+    // Normalise orientation + resize down; re-encoding bakes in the EXIF rotation.
+    // Deliberately NO crop. Forcing every photo into a 3:4 portrait frame cut the
+    // ends off any garment shot sideways or in landscape — irreversibly, before
+    // anything else got a look at it. The cutout worker trims to the garment far
+    // better, and the app fits rather than fills, so an odd aspect is harmless.
     const resized = await ImageManipulator.manipulate(asset.uri).resize({ width: 1024 }).renderAsync();
-    const base = await resized.saveAsync({ format: SaveFormat.JPEG, compress: 0.9 });
-    // 2) Auto centre-crop to a consistent 3:4 portrait frame (trims background).
-    const rect = centerCropRect(base.width, base.height, 3 / 4);
-    const cropped = await ImageManipulator.manipulate(base.uri).crop(rect).renderAsync();
-    const final = await cropped.saveAsync({ format: SaveFormat.JPEG, compress: 0.8, base64: true });
+    const final = await resized.saveAsync({ format: SaveFormat.JPEG, compress: 0.85, base64: true });
     if (!final.base64) continue;
     const path = `${userId}/${Date.now()}-${i}.jpg`;
     const { error: upErr } = await supabase.storage

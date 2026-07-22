@@ -40,10 +40,18 @@ export function ItemTile({
         <GarmentImage
           uri={item.imageUrl}
           rotation={item.rotation}
-          // Cutouts float on the tile; raw photos fill it.
-          contentFit={item.hasCutout ? 'contain' : 'cover'}
+          // Always fit, never fill: "cover" on a turned photo crops against the
+          // transposed box, which zooms into the middle of the garment.
+          contentFit="contain"
           style={styles.image}
         />
+        {!item.hasCutout && !selecting ? (
+          <View style={styles.pending}>
+            <Text variant="caption" style={{ fontSize: 10 }}>
+              original
+            </Text>
+          </View>
+        ) : null}
         {selecting ? (
           <View style={[styles.mark, selected && styles.markOn]}>
             {selected ? <Text style={styles.tick}>✓</Text> : null}
@@ -70,6 +78,19 @@ const styles = StyleSheet.create({
   },
   selected: { borderColor: colors.accent, borderWidth: 2 },
   image: { flex: 1 },
+  // Background removal runs on a schedule, so "no cutout yet" is a normal state —
+  // say so, rather than leaving you guessing whether it failed.
+  pending: {
+    position: 'absolute',
+    left: space.sm,
+    bottom: space.sm,
+    paddingHorizontal: space.sm,
+    paddingVertical: 2,
+    borderRadius: radius.chip,
+    backgroundColor: colors.bg,
+    borderWidth: 1,
+    borderColor: colors.hairline,
+  },
   mark: {
     position: 'absolute',
     top: space.sm,
