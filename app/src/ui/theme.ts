@@ -10,6 +10,7 @@ export const colors = {
   accent: '#B5603E', // terracotta — CTA / active only
   accentSoft: '#EFD9CD', // accent backgrounds (chips, highlights)
   success: '#4E6B4A',
+  danger: '#8C3A2B', // deeper than accent, so "remove" never reads as a CTA
 } as const;
 
 export const space = {

@@ -110,6 +110,41 @@ export async function addItemsFromLibrary(): Promise<string[]> {
   return (data ?? []).map((r) => r.id);
 }
 
+/**
+ * Permanently delete items and their photos.
+ *
+ * Storage first: once the rows are gone there is nothing left pointing at the files,
+ * and they'd sit in the bucket forever. A failed file removal is logged rather than
+ * thrown — a leftover file is a smaller problem than an item you can't get rid of.
+ */
+export async function deleteItems(ids: string[]): Promise<void> {
+  if (!ids.length) return;
+  const userId = await requireUserId();
+
+  const { data, error } = await supabase
+    .from('items')
+    .select('image_original, image_cutout')
+    .eq('user_id', userId)
+    .in('id', ids);
+  if (error) throw error;
+
+  const paths = (data ?? [])
+    .flatMap((r) => [r.image_original, r.image_cutout])
+    .filter((p): p is string => !!p);
+
+  if (paths.length) {
+    const { error: rmErr } = await supabase.storage.from(BUCKET).remove(paths);
+    if (rmErr) console.warn('could not remove some photos', rmErr);
+  }
+
+  const { error: delErr } = await supabase
+    .from('items')
+    .delete()
+    .eq('user_id', userId)
+    .in('id', ids);
+  if (delErr) throw delErr;
+}
+
 /** Ask the tag-item Edge Function to tag one item with Claude. Updates the row in place. */
 export async function tagItem(itemId: string): Promise<void> {
   const { error } = await supabase.functions.invoke('tag-item', { body: { itemId } });

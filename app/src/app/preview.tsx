@@ -1,8 +1,10 @@
 import { useLocalSearchParams } from 'expo-router';
 import { View } from 'react-native';
 
-import { FIXTURE_SETS } from '@/lib/fixtures';
+import { FIXTURE_ITEMS, FIXTURE_SETS } from '@/lib/fixtures';
+import { Button } from '@/ui/Button';
 import { DressingRoom, WornOutfit } from '@/ui/DressingRoom';
+import { ItemTile } from '@/ui/ItemTile';
 import { Text } from '@/ui/Text';
 import { colors, radius, space } from '@/ui/theme';
 
@@ -46,26 +48,57 @@ export default function Preview() {
           justifyContent: 'center',
         }}
       >
-        {chrome === '1' ? (
-          <View style={styles.note}>
-            <Text variant="body">
-              Soft neutrals with one warm accent — easy to wear and hard to get wrong.
+        {set === 'grid' ? (
+          <SelectionGrid />
+        ) : (
+          <>
+            {chrome === '1' ? (
+              <View style={styles.note}>
+                <Text variant="body">
+                  Soft neutrals with one warm accent — easy to wear and hard to get wrong.
+                </Text>
+                <Text variant="caption">Roll the sleeves for a less formal line.</Text>
+              </View>
+            ) : null}
+            <View>
+              {chrome === '1' ? (
+                <WornOutfit items={items} height={height} />
+              ) : (
+                <DressingRoom items={items} height={height} />
+              )}
+              {guides === '1' ? <Guides height={height} /> : null}
+            </View>
+            <Text variant="caption" style={{ textAlign: 'center', marginTop: space.lg }}>
+              {set} · h={height}
             </Text>
-            <Text variant="caption">Roll the sleeves for a less formal line.</Text>
-          </View>
-        ) : null}
-        <View>
-          {chrome === '1' ? (
-            <WornOutfit items={items} height={height} />
-          ) : (
-            <DressingRoom items={items} height={height} />
-          )}
-          {guides === '1' ? <Guides height={height} /> : null}
-        </View>
-        <Text variant="caption" style={{ textAlign: 'center', marginTop: space.lg }}>
-          {set} · h={height}
+          </>
+        )}
+      </View>
+    </View>
+  );
+}
+
+/** The wardrobe grid mid-selection — the real ItemTile and Button, not a mock-up. */
+function SelectionGrid() {
+  const tiles = FIXTURE_ITEMS.slice(0, 4);
+  const chosen = new Set([tiles[0].id, tiles[2].id]);
+  return (
+    <View style={{ gap: space.md }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' }}>
+        <Text variant="title">2 selected</Text>
+        <Text variant="label" style={{ color: colors.accent }}>
+          Done
         </Text>
       </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space.md }}>
+        {tiles.map((it) => (
+          <View key={it.id} style={{ width: '47%' }}>
+            <ItemTile item={it} selecting selected={chosen.has(it.id)} />
+          </View>
+        ))}
+      </View>
+      <Button label="Select 3 untagged" variant="secondary" onPress={() => {}} />
+      <Button label="Remove 2" variant="danger" onPress={() => {}} />
     </View>
   );
 }

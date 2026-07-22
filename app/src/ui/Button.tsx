@@ -5,24 +5,24 @@ import { colors, radius, space } from './theme';
 
 type Props = Omit<PressableProps, 'children'> & {
   label: string;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'danger';
 };
 
-/** One clear action per screen. Primary = ink fill; secondary = ghost. */
+/** One clear action per screen. Primary = ink fill; secondary = ghost; danger = brick. */
 export function Button({ label, variant = 'primary', style, ...rest }: Props) {
-  const primary = variant === 'primary';
+  const filled = variant === 'primary' || variant === 'danger';
   return (
     <Pressable
       accessibilityRole="button"
       style={(state) => [
         styles.base,
-        primary ? styles.primary : styles.secondary,
+        styles[variant],
         state.pressed && styles.pressed,
         typeof style === 'function' ? style(state) : style,
       ]}
       {...rest}
     >
-      <Text variant="bodyStrong" style={{ color: primary ? colors.surface : colors.ink }}>
+      <Text variant="bodyStrong" style={{ color: filled ? colors.surface : colors.ink }}>
         {label}
       </Text>
     </Pressable>
@@ -39,5 +39,6 @@ const styles = StyleSheet.create({
   },
   primary: { backgroundColor: colors.ink },
   secondary: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.hairline },
+  danger: { backgroundColor: colors.danger },
   pressed: { opacity: 0.85 },
 });
