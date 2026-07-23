@@ -22,15 +22,22 @@ const SYSTEM =
   `- silhouette: slim | regular | loose | oversized | tailored.\n` +
   `- layer_role: base | mid | outer.\n` +
   `- occasions: any of work, casual, going-out, active, formal.\n` +
-  `The garment's TOP is the collar on a shirt, the waistband on trousers or a skirt, ` +
-  `the shoulders on a dress or coat, the ankle opening on a shoe, the handle on a bag. ` +
-  `Its BOTTOM is the opposite end: hem, cuffs, sole, base.\n` +
-  `- orientation_note: one short sentence locating both ends in the frame, e.g. ` +
-  `"collar near the left edge, hem near the right edge". Describe what you see; do ` +
-  `not assume the garment is upright.\n` +
+  `ORIENTATION. The garment's TOP is the collar on a shirt, the waistband on trousers ` +
+  `or a skirt, the shoulders on a dress or coat, the ankle opening on a shoe, the ` +
+  `handle on a bag. Its BOTTOM is the opposite end: hem, cuffs, sole, base.\n` +
+  `- garment_is_wider_than_tall: consider only the garment, ignoring background. Is ` +
+  `the distance between its widest left and right points GREATER than the distance ` +
+  `between its highest and lowest points? Measure, do not guess.\n` +
+  `- orientation_note: one short sentence saying where each end sits, e.g. "collar ` +
+  `toward the left edge, hem toward the right edge".\n` +
   `- top_edge: which edge of the photo the garment's TOP lies nearest — top, right, ` +
-  `bottom or left. Must agree with orientation_note. Judge the garment, not the shape ` +
-  `of the photo: a wide photo of an upright shirt still has top_edge 'top'.\n` +
+  `bottom or left.\n` +
+  `KEY RULE: a top, shirt, dress, coat, trousers or skirt is TALLER than it is WIDE ` +
+  `when standing upright. So if garment_is_wider_than_tall is true for one of those, ` +
+  `it is lying on its side and top_edge MUST be 'left' or 'right' — never 'top'. ` +
+  `Decide which by finding the collar or waistband. Only shoes and bags are naturally ` +
+  `wider than tall, so for those 'top' is fine. A wide photo does not by itself mean ` +
+  `a sideways garment — judge the garment's own extent, not the frame.\n` +
   `Use plain-English colours (e.g. 'navy'). Output only the fields.`;
 
 const SCHEMA = {
@@ -52,17 +59,23 @@ const SCHEMA = {
     visual_weight: { type: 'string', enum: ['neutral', 'versatile', 'statement'] },
     layer_role: { type: 'string', enum: ['base', 'mid', 'outer'] },
     occasions: { type: 'array', items: { type: 'string' } },
-    // Order matters: the note is generated before top_edge, so the model has to
-    // locate the collar in words before committing to an answer.
+    // Order matters — structured output is generated in schema order, so the model
+    // must measure the garment's proportions and locate its ends in words before it
+    // commits to an edge. Asked for the edge first, it answered "top" by default.
+    garment_is_wider_than_tall: { type: 'boolean' },
     orientation_note: { type: 'string' },
     top_edge: { type: 'string', enum: ['top', 'right', 'bottom', 'left'] },
   },
   required: [
     'name', 'category', 'subcategory', 'primary_color', 'secondary_colors', 'is_neutral',
     'pattern', 'material', 'formality', 'warmth', 'seasonality', 'silhouette',
-    'visual_weight', 'layer_role', 'occasions', 'orientation_note', 'top_edge',
+    'visual_weight', 'layer_role', 'occasions',
+    'garment_is_wider_than_tall', 'orientation_note', 'top_edge',
   ],
 };
+
+/** Categories that stand taller than they are wide — where "wide" implies sideways. */
+const TALL_CATEGORIES = new Set(['top', 'bottom', 'dress', 'outerwear']);
 
 /**
  * Which edge the garment's top lies nearest → degrees to turn the photo clockwise.
@@ -132,11 +145,26 @@ Deno.serve(async (req) => {
     // deno-lint-ignore no-explicit-any
     const textBlock = (msg.content as any[]).find((b) => b.type === 'text');
     if (!textBlock) return json({ error: 'No tags returned' }, 502);
-    // Both are prompt-only fields — the row stores degrees.
-    const { orientation_note, top_edge, ...tags } = JSON.parse(textBlock.text);
-    const rotation = ROTATION_FOR[top_edge] ?? 0;
+    // These three are prompt-only fields — the row stores degrees.
+    const { garment_is_wider_than_tall, orientation_note, top_edge, ...tags } =
+      JSON.parse(textBlock.text);
+
+    // A top/dress/trousers that measures wider than tall is lying on its side, so
+    // "top" cannot be right. The model has claimed both at once, so trust the
+    // measurement over the conclusion and turn it a quarter-turn rather than leave
+    // it flat on its side. Direction is a coin toss here — one tap of Rotate fixes
+    // a wrong guess, whereas leaving it upright is wrong every time.
+    const contradiction =
+      garment_is_wider_than_tall === true &&
+      TALL_CATEGORIES.has(tags.category) &&
+      (top_edge === 'top' || top_edge === 'bottom');
+    const rotation = contradiction ? 90 : (ROTATION_FOR[top_edge] ?? 0);
+
     // Shows up in Supabase → Edge Functions → tag-item → Logs.
-    console.log(`orientation: top_edge=${top_edge} rotation=${rotation} — ${orientation_note}`);
+    console.log(
+      `orientation: wider_than_tall=${garment_is_wider_than_tall} top_edge=${top_edge} ` +
+        `rotation=${rotation}${contradiction ? ' (overrode contradictory "top")' : ''} — ${orientation_note}`,
+    );
 
     const { error: upErr } = await supabase
       .from('items')
