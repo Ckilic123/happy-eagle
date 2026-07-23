@@ -12,6 +12,7 @@ import {
 
 import { Button } from './Button';
 import { Chip } from './Chip';
+import { Swatches } from './ColourStory';
 import { DotScale } from './DotScale';
 import { GarmentImage } from './GarmentImage';
 import { Text } from './Text';
@@ -118,11 +119,12 @@ export function ItemSheet({
             />
           </View>
 
-          <View style={{ gap: space.xs }}>
+          <View style={{ gap: space.sm }}>
             <Text variant="title">{shown.name ?? 'Item'}</Text>
             <Text variant="caption">
               {[shown.category, shown.primary_color].filter(Boolean).join(' · ') || 'Not tagged yet'}
             </Text>
+            <Swatches hexes={shown.colors} />
           </View>
 
           <View style={styles.rows}>

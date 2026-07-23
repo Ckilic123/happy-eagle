@@ -5,6 +5,7 @@ import { ActivityIndicator, Alert, Dimensions, Pressable, ScrollView, View } fro
 import { type Item, listItems } from '@/lib/items';
 import { type Mood, suggestOutfit } from '@/lib/suggest';
 import { Button } from '@/ui/Button';
+import { ColourStory } from '@/ui/ColourStory';
 import { DressingRoom } from '@/ui/DressingRoom';
 import { ItemSheet } from '@/ui/ItemSheet';
 import { MoodControl } from '@/ui/MoodControl';
@@ -128,6 +129,8 @@ export default function OutfitScreen() {
               </Pressable>
             ))}
           </View>
+
+          <ColourStory items={outfit.items} />
 
           <View style={styles.note}>
             <Text variant="body">{outfit.why}</Text>

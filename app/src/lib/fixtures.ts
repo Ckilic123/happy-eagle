@@ -81,6 +81,16 @@ const BAG = svg(
    <path d="M8 42 L102 42 L101 56 L9 56 Z" fill="#8A6A49"/>`,
 );
 
+/** Matches what the cutout worker samples: the garment's real colours, most-used first. */
+const HEXES: Record<string, string[]> = {
+  'fx-tee': ['#efeae2', '#e3dcd1'],
+  'fx-jeans': ['#4a5a72', '#3c4a5e'],
+  'fx-dress': ['#b5603e'],
+  'fx-blazer': ['#6b6a50', '#5b5a43'],
+  'fx-sneakers': ['#f2efe9', '#1b1a17'],
+  'fx-bag': ['#9c7a55', '#8a6a49'],
+};
+
 function item(
   id: string,
   name: string,
@@ -102,6 +112,7 @@ function item(
     formality: 2,
     warmth: 3,
     occasions: ['casual'],
+    colors: HEXES[id] ?? [],
   };
 }
 

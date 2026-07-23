@@ -20,6 +20,7 @@ export type Item = {
   formality: number | null; // 1 loungewear … 5 black-tie
   warmth: number | null; // 1 hot-weather … 5 heavy winter
   occasions: string[];
+  colors: string[]; // the garment's real colours, most-used first
 };
 
 /** Every category the Cataloguer can assign, in the order they're offered for editing. */
@@ -44,7 +45,7 @@ export async function listItems(): Promise<Item[]> {
   const { data, error } = await supabase
     .from('items')
     .select(
-      'id, name, category, primary_color, image_original, image_cutout, rotation, formality, warmth, occasions',
+      'id, name, category, primary_color, image_original, image_cutout, rotation, formality, warmth, occasions, colors',
     )
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
@@ -71,6 +72,7 @@ export async function listItems(): Promise<Item[]> {
       hasCutout: !!r.image_cutout,
       rotation: r.rotation ?? 0,
       occasions: r.occasions ?? [],
+      colors: r.colors ?? [],
     };
   });
 }

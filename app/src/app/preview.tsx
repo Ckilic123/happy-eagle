@@ -6,6 +6,7 @@ import { FIXTURE_ITEMS, FIXTURE_SETS } from '@/lib/fixtures';
 import type { Mood } from '@/lib/suggest';
 import { Button } from '@/ui/Button';
 import { Chip } from '@/ui/Chip';
+import { ColourStory } from '@/ui/ColourStory';
 import { DressingRoom } from '@/ui/DressingRoom';
 import { ItemSheet } from '@/ui/ItemSheet';
 import { ItemTile } from '@/ui/ItemTile';
@@ -139,6 +140,7 @@ function OutfitPreview({ height }: { height: number }) {
             </View>
           ))}
         </View>
+        <ColourStory items={items} />
         <View style={styles.note}>
           <Text variant="body">
             Soft neutrals with one warm accent — easy to wear and hard to get wrong.
