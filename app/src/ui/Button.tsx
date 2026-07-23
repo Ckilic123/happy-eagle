@@ -5,12 +5,19 @@ import { colors, radius, space } from './theme';
 
 type Props = Omit<PressableProps, 'children'> & {
   label: string;
-  variant?: 'primary' | 'secondary' | 'danger';
+  /**
+   * `danger` fills brick — for a destructive action that IS the point of the screen.
+   * `dangerQuiet` only tints the label, for a destructive action sitting beside a
+   * primary one: a filled red block out-shouts the ink button next to it, which puts
+   * "Remove" above "What goes with this?" in the eye's order. It shouldn't be.
+   */
+  variant?: 'primary' | 'secondary' | 'danger' | 'dangerQuiet';
 };
 
 /** One clear action per screen. Primary = ink fill; secondary = ghost; danger = brick. */
 export function Button({ label, variant = 'primary', style, ...rest }: Props) {
   const filled = variant === 'primary' || variant === 'danger';
+  const label_color = filled ? colors.surface : variant === 'dangerQuiet' ? colors.danger : colors.ink;
   return (
     <Pressable
       accessibilityRole="button"
@@ -22,7 +29,7 @@ export function Button({ label, variant = 'primary', style, ...rest }: Props) {
       ]}
       {...rest}
     >
-      <Text variant="bodyStrong" style={{ color: filled ? colors.surface : colors.ink }}>
+      <Text variant="bodyStrong" style={{ color: label_color }}>
         {label}
       </Text>
     </Pressable>
@@ -40,5 +47,10 @@ const styles = StyleSheet.create({
   primary: { backgroundColor: colors.ink },
   secondary: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.hairline },
   danger: { backgroundColor: colors.danger },
+  dangerQuiet: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: colors.hairline,
+  },
   pressed: { opacity: 0.85 },
 });

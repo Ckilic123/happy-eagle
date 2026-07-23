@@ -14,7 +14,19 @@ export type Item = {
   imageUrl: string | null; // signed URL for display
   hasCutout: boolean; // true once background removal has run
   rotation: number; // degrees clockwise to stand the garment upright (0/90/180/270)
+  // Judgement fields. The Stylist picks looks from these and never sees the photo,
+  // so a wrong value here quietly skews every future suggestion — which is why they
+  // are editable in the item sheet.
+  formality: number | null; // 1 loungewear … 5 black-tie
+  warmth: number | null; // 1 hot-weather … 5 heavy winter
+  occasions: string[];
 };
+
+/** Every category the Cataloguer can assign, in the order they're offered for editing. */
+export const CATEGORIES = ['top', 'bottom', 'dress', 'outerwear', 'shoes', 'accessory'] as const;
+
+/** Occasions an item can suit. Matches the Cataloguer's vocabulary. */
+export const OCCASIONS = ['work', 'casual', 'going-out', 'active', 'formal'] as const;
 
 const BUCKET = 'wardrobe';
 
@@ -31,7 +43,9 @@ export async function listItems(): Promise<Item[]> {
   const userId = await requireUserId();
   const { data, error } = await supabase
     .from('items')
-    .select('id, name, category, primary_color, image_original, image_cutout, rotation')
+    .select(
+      'id, name, category, primary_color, image_original, image_cutout, rotation, formality, warmth, occasions',
+    )
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
   if (error) throw error;
@@ -56,8 +70,28 @@ export async function listItems(): Promise<Item[]> {
       imageUrl: p ? (urlByPath.get(p) ?? null) : null,
       hasCutout: !!r.image_cutout,
       rotation: r.rotation ?? 0,
+      occasions: r.occasions ?? [],
     };
   });
+}
+
+/**
+ * Correct one item's tags.
+ *
+ * Writes immediately rather than collecting edits behind a Save button: each change is
+ * one tap on one field, and a half-finished edit has no meaning worth preserving.
+ */
+export async function updateItem(
+  id: string,
+  patch: Partial<Pick<Item, 'name' | 'category' | 'formality' | 'warmth' | 'occasions'>>,
+): Promise<void> {
+  const userId = await requireUserId();
+  const { error } = await supabase
+    .from('items')
+    .update({ ...patch, updated_at: new Date().toISOString() })
+    .eq('user_id', userId)
+    .eq('id', id);
+  if (error) throw error;
 }
 
 /** Turn items a quarter-turn clockwise — the manual fix when the Cataloguer guesses wrong. */

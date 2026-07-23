@@ -99,6 +99,9 @@ function item(
     imageUrl: uri,
     hasCutout: true,
     rotation,
+    formality: 2,
+    warmth: 3,
+    occasions: ['casual'],
   };
 }
 

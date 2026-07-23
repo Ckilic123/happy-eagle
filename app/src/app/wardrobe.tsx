@@ -1,9 +1,10 @@
 import { type Href, router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, Alert, FlatList, Pressable, View } from 'react-native';
+import { ActivityIndicator, Alert, FlatList, Pressable, ScrollView, View } from 'react-native';
 
 import {
   addItemsFromLibrary,
+  CATEGORIES,
   deleteItems,
   type Item,
   listItems,
@@ -11,10 +12,21 @@ import {
   tagItem,
 } from '@/lib/items';
 import { Button } from '@/ui/Button';
+import { Chip } from '@/ui/Chip';
+import { ItemSheet } from '@/ui/ItemSheet';
 import { ItemTile } from '@/ui/ItemTile';
 import { Screen } from '@/ui/Screen';
 import { Text } from '@/ui/Text';
 import { colors, space } from '@/ui/theme';
+
+const LABEL: Record<string, string> = {
+  top: 'Tops',
+  bottom: 'Bottoms',
+  dress: 'Dresses',
+  outerwear: 'Outerwear',
+  shoes: 'Shoes',
+  accessory: 'Accessories',
+};
 
 export default function Wardrobe() {
   const [items, setItems] = useState<Item[]>([]);
@@ -23,6 +35,8 @@ export default function Wardrobe() {
   const [status, setStatus] = useState<string | null>(null);
   const [selecting, setSelecting] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [filter, setFilter] = useState<string | null>(null);
+  const [sheetItem, setSheetItem] = useState<Item | null>(null);
 
   const load = useCallback(async () => {
     try {
@@ -53,7 +67,10 @@ export default function Wardrobe() {
     });
   }
 
-  /** Items the Cataloguer never managed to tag — the usual cleanup target. */
+  // Only offer a filter for categories that actually exist — an empty "Dresses"
+  // filter is a dead end the user has to discover by tapping it.
+  const present = CATEGORIES.filter((c) => items.some((i) => i.category === c));
+  const shownItems = filter ? items.filter((i) => i.category === filter) : items;
   const untagged = items.filter((i) => !i.category);
 
   async function onAdd() {
@@ -62,16 +79,16 @@ export default function Wardrobe() {
       setStatus('Uploading…');
       const ids = await addItemsFromLibrary();
       if (ids.length) {
-        await load(); // show the photos immediately (as "New item")
+        await load(); // show the photos immediately, before tags land
         for (let i = 0; i < ids.length; i++) {
           setStatus(`Tagging ${i + 1} of ${ids.length}…`);
           try {
             await tagItem(ids[i]);
           } catch (e) {
-            console.warn('tag failed', e); // e.g. function not deployed yet — item stays untagged
+            console.warn('tag failed', e); // leave it untagged rather than lose the photo
           }
         }
-        await load(); // reflect the tags
+        await load();
       }
     } catch (e) {
       Alert.alert('Could not add photos', e instanceof Error ? e.message : 'Please try again.');
@@ -81,7 +98,6 @@ export default function Wardrobe() {
     }
   }
 
-  /** Quarter-turn the selection. Stays in selection mode so it can be tapped again. */
   async function onRotate() {
     try {
       await rotateItems([...selected], items);
@@ -116,12 +132,36 @@ export default function Wardrobe() {
     );
   }
 
+  // ── First run: one screen, one action, no questions ──────────────────────
+  if (!loading && items.length === 0) {
+    return (
+      <Screen>
+        <View style={{ flex: 1, justifyContent: 'center', gap: space.md }}>
+          <Text variant="display">Rediscover the wardrobe you already own.</Text>
+          <Text variant="body" style={{ color: colors.muted }}>
+            Photograph a few pieces. I'll catalogue them and start putting looks together.
+          </Text>
+        </View>
+        <Button
+          label={status ?? 'Add your first pieces'}
+          onPress={onAdd}
+          disabled={adding}
+          style={adding ? { opacity: 0.6 } : undefined}
+        />
+      </Screen>
+    );
+  }
+
   return (
     <Screen>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <Text variant="title">{selecting ? `${selected.size} selected` : 'Your wardrobe'}</Text>
-          {!selecting ? <Text variant="caption">{items.length} items</Text> : null}
+          {!selecting && items.length > 0 ? (
+            <Text variant="caption">
+              {items.length} {items.length === 1 ? 'piece' : 'pieces'}
+            </Text>
+          ) : null}
         </View>
         {items.length > 0 && !adding ? (
           <Pressable onPress={() => (selecting ? endSelecting() : setSelecting(true))} hitSlop={12}>
@@ -132,20 +172,38 @@ export default function Wardrobe() {
         ) : null}
       </View>
 
+      {present.length > 1 && !selecting ? (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: space.sm, paddingBottom: space.md }}
+        >
+          <Chip label="All" selected={filter === null} onPress={() => setFilter(null)} />
+          {present.map((c) => (
+            <Chip
+              key={c}
+              label={LABEL[c]}
+              selected={filter === c}
+              onPress={() => setFilter(filter === c ? null : c)}
+            />
+          ))}
+        </ScrollView>
+      ) : null}
+
       {loading ? (
         <View style={styles.center}>
           <ActivityIndicator color={colors.ink} />
         </View>
-      ) : items.length === 0 ? (
+      ) : shownItems.length === 0 ? (
         <View style={styles.center}>
           <Text variant="body" style={{ color: colors.muted, textAlign: 'center' }}>
-            Add a few favourites to get started.
+            Nothing here yet.
           </Text>
         </View>
       ) : (
         <FlatList
           style={{ flex: 1 }}
-          data={items}
+          data={shownItems}
           keyExtractor={(i) => i.id}
           numColumns={2}
           columnWrapperStyle={{ gap: space.md }}
@@ -155,8 +213,8 @@ export default function Wardrobe() {
               item={item}
               selecting={selecting}
               selected={selected.has(item.id)}
-              onPress={selecting ? () => toggle(item.id) : undefined}
-              // Long-press is the shortcut in; "Select" is the discoverable way.
+              // Tapping opens the item; only in select mode does it tick.
+              onPress={selecting ? () => toggle(item.id) : () => setSheetItem(item)}
               onLongPress={() => {
                 setSelecting(true);
                 toggle(item.id);
@@ -189,15 +247,13 @@ export default function Wardrobe() {
           </>
         ) : (
           <>
+            {/* The app's whole promise, so it gets the primary button. */}
             {items.length > 0 && !adding ? (
-              <Button
-                label="Build an outfit"
-                variant="secondary"
-                onPress={() => router.push('/outfit' as Href)}
-              />
+              <Button label="Style me" onPress={() => router.push('/outfit' as Href)} />
             ) : null}
             <Button
               label={status ?? 'Add items'}
+              variant={items.length > 0 ? 'secondary' : 'primary'}
               onPress={onAdd}
               disabled={adding}
               style={adding ? { opacity: 0.6 } : undefined}
@@ -205,6 +261,13 @@ export default function Wardrobe() {
           </>
         )}
       </View>
+
+      <ItemSheet
+        item={sheetItem}
+        onClose={() => setSheetItem(null)}
+        onChanged={load}
+        onStyle={(item) => router.push(`/outfit?seed=${item.id}` as Href)}
+      />
     </Screen>
   );
 }
@@ -214,7 +277,7 @@ const styles = {
     flexDirection: 'row' as const,
     justifyContent: 'space-between' as const,
     alignItems: 'baseline' as const,
-    marginBottom: space.lg,
+    marginBottom: space.md,
   },
   headerLeft: {
     flexDirection: 'row' as const,

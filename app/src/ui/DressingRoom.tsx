@@ -5,8 +5,6 @@ import type { Item } from '@/lib/items';
 
 import { FIGURE_ASPECT, Figure } from './Figure';
 import { GarmentImage } from './GarmentImage';
-import { Text } from './Text';
-import { colors, radius, space } from './theme';
 
 /**
  * The outfit, worn.
@@ -66,46 +64,6 @@ export function DressingRoom({ items, height }: { items: Item[]; height: number 
     </View>
   );
 }
-
-/**
- * The figure plus a name for every piece in the look.
- *
- * The chips aren't decoration: a jacket covers most of what's under it, exactly as it
- * would in life, so the list is what guarantees you can still tell what you're wearing.
- * Items without a cutout stay off the body — a raw photo would land as a rectangle of
- * background — but they're still named here.
- */
-export function WornOutfit({ items, height }: { items: Item[]; height: number }) {
-  return (
-    <View style={{ gap: space.lg }}>
-      <DressingRoom items={items.filter((i) => i.hasCutout)} height={height} />
-      <View style={styles.pieces}>
-        {items.map((item) => (
-          <View key={item.id} style={styles.piece}>
-            <Text variant="label">{item.name ?? 'Item'}</Text>
-          </View>
-        ))}
-      </View>
-    </View>
-  );
-}
-
-const styles = {
-  pieces: {
-    flexDirection: 'row' as const,
-    flexWrap: 'wrap' as const,
-    justifyContent: 'center' as const,
-    gap: space.sm,
-  },
-  piece: {
-    paddingHorizontal: space.md,
-    paddingVertical: space.sm,
-    borderRadius: radius.chip,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.hairline,
-  },
-};
 
 function Garment({
   item,

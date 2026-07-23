@@ -1,24 +1,26 @@
-import { type Href, router } from 'expo-router';
-import { View } from 'react-native';
+import { type Href, Redirect } from 'expo-router';
+import { ActivityIndicator, View } from 'react-native';
 
-import { Button } from '@/ui/Button';
-import { Screen } from '@/ui/Screen';
-import { Text } from '@/ui/Text';
-import { colors, space } from '@/ui/theme';
+import { useAuthSession } from '@/lib/auth';
+import { colors } from '@/ui/theme';
 
-export default function Welcome() {
-  return (
-    <Screen>
-      <View style={{ flex: 1, justifyContent: 'flex-end', gap: space.md }}>
-        <Text variant="display">Rediscover the wardrobe you already own.</Text>
-        <Text variant="body" style={{ color: colors.muted }}>
-          A quiet styling companion for the clothes already in your closet. Less shopping. More
-          wearing.
-        </Text>
+/**
+ * The wardrobe is the app, so the root does nothing but get out of the way.
+ *
+ * There is no welcome screen and no questionnaire: people cannot usefully
+ * self-describe their style, and the honest signal is in the clothes they own. The
+ * first-run invitation lives inside the wardrobe as its empty state, which means a
+ * returning user never sees a gate.
+ */
+export default function Index() {
+  const { session, loading } = useAuthSession();
+
+  if (loading || !session) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.bg }}>
+        <ActivityIndicator color={colors.ink} />
       </View>
-      <View style={{ paddingTop: space.xl }}>
-        <Button label="Begin" onPress={() => router.push('/onboarding' as Href)} />
-      </View>
-    </Screen>
-  );
+    );
+  }
+  return <Redirect href={'/wardrobe' as Href} />;
 }
