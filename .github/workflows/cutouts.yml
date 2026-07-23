@@ -7,7 +7,7 @@ on:
   workflow_dispatch: # and a "Run workflow" button
     inputs:
       reprocess:
-        description: 'Re-cut items that already have a cutout'
+        description: 'Redo every item (not just ones missing a cutout)'
         type: boolean
         default: false
 

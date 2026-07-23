@@ -61,16 +61,19 @@ def main() -> int:
 
     sb = create_client(url, key)
 
-    # REPROCESS=1 re-cuts items that already have a cutout (e.g. after changing how
-    # cutouts are produced). The original photo is never touched, so this is safe to
-    # repeat; the new PNG upserts over the old path.
+    # REPROCESS=1 re-cuts *every* item, whether or not it already has a cutout — the
+    # "redo everything" button after changing how cutouts are made. It deliberately
+    # does not exclude already-cut items: a run that skipped the newest photo because
+    # it had not been cut yet is the opposite of what "redo everything" should mean.
+    # Originals are never touched, so this is safe to repeat; each PNG upserts.
     reprocess = os.environ.get("REPROCESS") == "1"
     q = sb.table("items").select("id, user_id, image_original")
-    q = q.not_.is_("image_cutout", "null") if reprocess else q.is_("image_cutout", "null")
+    if not reprocess:
+        q = q.is_("image_cutout", "null")
     rows = q.limit(BATCH).execute().data or []
     pending = [r for r in rows if r.get("image_original")]
     if not pending:
-        print("Nothing to do — every item already has a cutout.")
+        print("Nothing to do — no items need a cutout.")
         return 0
 
     print(f"Processing {len(pending)} item(s)...")
