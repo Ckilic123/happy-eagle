@@ -5,7 +5,6 @@ import { ScrollView, View } from 'react-native';
 import { FIXTURE_ITEMS, FIXTURE_SETS } from '@/lib/fixtures';
 import type { Mood } from '@/lib/suggest';
 import { Button } from '@/ui/Button';
-import { Chip } from '@/ui/Chip';
 import { ColourStory } from '@/ui/ColourStory';
 import { DressingRoom } from '@/ui/DressingRoom';
 import { ItemSheet } from '@/ui/ItemSheet';
@@ -45,51 +44,57 @@ export default function Preview() {
   );
 }
 
-/** The wardrobe as it looks with clothes in it. */
+/** The wardrobe as it looks with clothes in it — grouped, not filtered. */
 function WardrobeHome() {
-  const [filter, setFilter] = useState<string | null>(null);
-  const tiles = FIXTURE_ITEMS.slice(0, 6);
-  const shown = filter ? tiles.filter((i) => i.category === filter) : tiles;
+  // A realistic wardrobe has several of each kind. Reviewing against one-of-each
+  // makes the grouped layout look sparser than it ever will in use.
+  const cellWidth = (390 - space.xl * 2 - space.md * 2) / 3;
+  const tiles = [
+    ...FIXTURE_ITEMS.slice(0, 6),
+    ...FIXTURE_ITEMS.slice(0, 6).map((i) => ({ ...i, id: `${i.id}-b`, name: `${i.name} II` })),
+    ...FIXTURE_ITEMS.slice(0, 3).map((i) => ({ ...i, id: `${i.id}-c`, name: `${i.name} III` })),
+  ];
+  const sections = [
+    { key: 'top', title: 'Tops', items: tiles.filter((i) => i.category === 'top') },
+    { key: 'bottom', title: 'Bottoms', items: tiles.filter((i) => i.category === 'bottom') },
+    { key: 'dress', title: 'Dresses', items: tiles.filter((i) => i.category === 'dress') },
+    { key: 'outerwear', title: 'Outerwear', items: tiles.filter((i) => i.category === 'outerwear') },
+    { key: 'shoes', title: 'Shoes', items: tiles.filter((i) => i.category === 'shoes') },
+    { key: 'accessory', title: 'Accessories', items: tiles.filter((i) => i.category === 'accessory') },
+  ].filter((s) => s.items.length > 0);
 
   return (
     <View style={{ flex: 1, padding: space.xl }}>
       <View style={styles.header}>
         <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: space.sm }}>
           <Text variant="title">Your wardrobe</Text>
-          <Text variant="caption">6 pieces</Text>
+          <Text variant="caption">{tiles.length} pieces</Text>
         </View>
         <Text variant="label" style={{ color: colors.accent }}>
-          Select
+          Add
         </Text>
       </View>
 
       <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ gap: space.sm, paddingBottom: space.md }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ gap: space.xl, paddingBottom: space.xl }}
       >
-        <Chip label="All" selected={filter === null} onPress={() => setFilter(null)} />
-        {['top', 'bottom', 'dress', 'shoes'].map((c) => (
-          <Chip key={c} label={c} selected={filter === c} onPress={() => setFilter(c)} />
-        ))}
-      </ScrollView>
-
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: space.md }}>
-        {[0, 2, 4].map((row) => (
-          <View key={row} style={{ flexDirection: 'row', gap: space.md }}>
-            {shown.slice(row, row + 2).map((it) => (
-              <View key={it.id} style={{ flex: 1 }}>
-                <ItemTile item={it} />
-              </View>
-            ))}
-            {shown.slice(row, row + 2).length === 1 ? <View style={{ flex: 1 }} /> : null}
+        {sections.map((s) => (
+          <View key={s.key} style={{ gap: space.sm }}>
+            <Text variant="caption">{s.title}</Text>
+            <View style={styles.grid}>
+              {s.items.map((it) => (
+                <View key={it.id} style={{ width: cellWidth }}>
+                  <ItemTile item={it} />
+                </View>
+              ))}
+            </View>
           </View>
         ))}
       </ScrollView>
 
-      <View style={{ paddingTop: space.md, gap: space.sm }}>
+      <View style={{ paddingTop: space.md }}>
         <Button label="Style me" onPress={() => {}} />
-        <Button label="Add items" variant="secondary" onPress={() => {}} />
       </View>
     </View>
   );
@@ -165,6 +170,7 @@ const styles = {
     alignItems: 'baseline' as const,
     marginBottom: space.md,
   },
+  grid: { flexDirection: 'row' as const, flexWrap: 'wrap' as const, gap: space.md },
   headerCentred: {
     flexDirection: 'row' as const,
     alignItems: 'center' as const,

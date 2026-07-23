@@ -1,6 +1,13 @@
 import { type Href, router, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ActivityIndicator, Alert, FlatList, Pressable, ScrollView, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Pressable,
+  ScrollView,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 import {
   addItemsFromLibrary,
@@ -12,14 +19,13 @@ import {
   tagItem,
 } from '@/lib/items';
 import { Button } from '@/ui/Button';
-import { Chip } from '@/ui/Chip';
 import { ItemSheet } from '@/ui/ItemSheet';
 import { ItemTile } from '@/ui/ItemTile';
 import { Screen } from '@/ui/Screen';
 import { Text } from '@/ui/Text';
 import { colors, space } from '@/ui/theme';
 
-const LABEL: Record<string, string> = {
+const SECTION: Record<string, string> = {
   top: 'Tops',
   bottom: 'Bottoms',
   dress: 'Dresses',
@@ -28,6 +34,24 @@ const LABEL: Record<string, string> = {
   accessory: 'Accessories',
 };
 
+/** Below this many pieces the grid stays flat — see `sections` below. */
+const GROUP_ABOVE = 10;
+
+const COLUMNS = 3;
+
+/**
+ * Exact tile width, rather than a percentage.
+ *
+ * Percentages plus fixed gaps overflow by a point or two and silently drop the last
+ * tile to the next row — the grid looks like two columns and nothing says why.
+ * Measuring the row and dividing it can't drift.
+ */
+function useCellWidth() {
+  const { width } = useWindowDimensions();
+  const content = width - space.xl * 2; // Screen's horizontal padding
+  return (content - space.md * (COLUMNS - 1)) / COLUMNS;
+}
+
 export default function Wardrobe() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,8 +59,8 @@ export default function Wardrobe() {
   const [status, setStatus] = useState<string | null>(null);
   const [selecting, setSelecting] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [filter, setFilter] = useState<string | null>(null);
   const [sheetItem, setSheetItem] = useState<Item | null>(null);
+  const cellWidth = useCellWidth();
 
   const load = useCallback(async () => {
     try {
@@ -67,11 +91,28 @@ export default function Wardrobe() {
     });
   }
 
-  // Only offer a filter for categories that actually exist — an empty "Dresses"
-  // filter is a dead end the user has to discover by tapping it.
-  const present = CATEGORIES.filter((c) => items.some((i) => i.category === c));
-  const shownItems = filter ? items.filter((i) => i.category === filter) : items;
-  const untagged = items.filter((i) => !i.category);
+  /**
+   * Grouped rather than filtered.
+   *
+   * A row of category buttons was chrome sitting on top of the clothes, on the one
+   * screen where the clothes are the whole point — and it made you tap to see less.
+   * Quiet headings give the same structure, show everything at once, and cost nothing
+   * to read. Anything the Cataloguer hasn't tagged goes last, under its own heading,
+   * so it's visible rather than scattered.
+   */
+  const grouped = [
+    ...CATEGORIES.map((c) => ({
+      key: c,
+      title: SECTION[c],
+      items: items.filter((i) => i.category === c),
+    })),
+    { key: 'untagged', title: 'Not tagged yet', items: items.filter((i) => !i.category) },
+  ].filter((s) => s.items.length > 0);
+
+  // Headings earn their place only once there is something to organise. A new
+  // wardrobe with one of each would otherwise be six headings above six garments —
+  // structure for its own sake, and a long scroll to see almost nothing.
+  const sections = items.length >= GROUP_ABOVE ? grouped : [{ key: 'all', title: '', items }];
 
   async function onAdd() {
     setAdding(true);
@@ -163,66 +204,48 @@ export default function Wardrobe() {
             </Text>
           ) : null}
         </View>
-        {items.length > 0 && !adding ? (
-          <Pressable onPress={() => (selecting ? endSelecting() : setSelecting(true))} hitSlop={12}>
+        {!adding ? (
+          <Pressable onPress={selecting ? endSelecting : onAdd} hitSlop={12}>
             <Text variant="label" style={{ color: colors.accent }}>
-              {selecting ? 'Done' : 'Select'}
+              {selecting ? 'Done' : 'Add'}
             </Text>
           </Pressable>
-        ) : null}
+        ) : (
+          <Text variant="caption">{status}</Text>
+        )}
       </View>
-
-      {present.length > 1 && !selecting ? (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ gap: space.sm, paddingBottom: space.md }}
-        >
-          <Chip label="All" selected={filter === null} onPress={() => setFilter(null)} />
-          {present.map((c) => (
-            <Chip
-              key={c}
-              label={LABEL[c]}
-              selected={filter === c}
-              onPress={() => setFilter(filter === c ? null : c)}
-            />
-          ))}
-        </ScrollView>
-      ) : null}
 
       {loading ? (
         <View style={styles.center}>
           <ActivityIndicator color={colors.ink} />
         </View>
-      ) : shownItems.length === 0 ? (
-        <View style={styles.center}>
-          <Text variant="body" style={{ color: colors.muted, textAlign: 'center' }}>
-            Nothing here yet.
-          </Text>
-        </View>
       ) : (
-        <FlatList
-          style={{ flex: 1 }}
-          data={shownItems}
-          keyExtractor={(i) => i.id}
-          numColumns={2}
-          columnWrapperStyle={{ gap: space.md }}
-          contentContainerStyle={{ gap: space.md, paddingBottom: space.xxxl }}
-          renderItem={({ item }) => (
-            <ItemTile
-              item={item}
-              selecting={selecting}
-              selected={selected.has(item.id)}
-              // Tapping opens the item; only in select mode does it tick.
-              onPress={selecting ? () => toggle(item.id) : () => setSheetItem(item)}
-              onLongPress={() => {
-                setSelecting(true);
-                toggle(item.id);
-              }}
-            />
-          )}
+        <ScrollView
           showsVerticalScrollIndicator={false}
-        />
+          contentContainerStyle={{ gap: space.xl, paddingBottom: space.xl }}
+        >
+          {sections.map((section) => (
+            <View key={section.key} style={{ gap: space.sm }}>
+              {section.title ? <Text variant="caption">{section.title}</Text> : null}
+              <View style={styles.grid}>
+                {section.items.map((item) => (
+                  <View key={item.id} style={{ width: cellWidth }}>
+                    <ItemTile
+                      item={item}
+                      selecting={selecting}
+                      selected={selected.has(item.id)}
+                      onPress={selecting ? () => toggle(item.id) : () => setSheetItem(item)}
+                      onLongPress={() => {
+                        setSelecting(true);
+                        toggle(item.id);
+                      }}
+                    />
+                  </View>
+                ))}
+              </View>
+            </View>
+          ))}
+        </ScrollView>
       )}
 
       <View style={{ paddingTop: space.md, gap: space.sm }}>
@@ -230,12 +253,6 @@ export default function Wardrobe() {
           <>
             {selected.size > 0 ? (
               <Button label="Rotate ↻" variant="secondary" onPress={onRotate} />
-            ) : untagged.length > 0 ? (
-              <Button
-                label={`Select ${untagged.length} untagged`}
-                variant="secondary"
-                onPress={() => setSelected(new Set(untagged.map((i) => i.id)))}
-              />
             ) : null}
             <Button
               label={selected.size ? `Remove ${selected.size}` : 'Select items to remove'}
@@ -246,19 +263,9 @@ export default function Wardrobe() {
             />
           </>
         ) : (
-          <>
-            {/* The app's whole promise, so it gets the primary button. */}
-            {items.length > 0 && !adding ? (
-              <Button label="Style me" onPress={() => router.push('/outfit' as Href)} />
-            ) : null}
-            <Button
-              label={status ?? 'Add items'}
-              variant={items.length > 0 ? 'secondary' : 'primary'}
-              onPress={onAdd}
-              disabled={adding}
-              style={adding ? { opacity: 0.6 } : undefined}
-            />
-          </>
+          // One action. Adding lives in the header because you do it rarely; this is
+          // what the app is for.
+          <Button label="Style me" onPress={() => router.push('/outfit' as Href)} />
         )}
       </View>
 
@@ -277,12 +284,13 @@ const styles = {
     flexDirection: 'row' as const,
     justifyContent: 'space-between' as const,
     alignItems: 'baseline' as const,
-    marginBottom: space.md,
+    marginBottom: space.lg,
   },
   headerLeft: {
     flexDirection: 'row' as const,
     alignItems: 'baseline' as const,
     gap: space.sm,
   },
+  grid: { flexDirection: 'row' as const, flexWrap: 'wrap' as const, gap: space.md },
   center: { flex: 1, alignItems: 'center' as const, justifyContent: 'center' as const },
 };

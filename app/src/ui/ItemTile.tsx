@@ -6,7 +6,14 @@ import { GarmentImage } from './GarmentImage';
 import { Text } from './Text';
 import { colors, radius, space } from './theme';
 
-/** Wardrobe grid cell: the garment on a neutral tile, name + colour below. */
+/**
+ * Wardrobe grid cell: the garment on a neutral tile, and nothing else.
+ *
+ * No caption. The picture already identifies the thing — you recognise your own
+ * clothes — and the Cataloguer's names are long enough ("Striped Off-Shoulder Top
+ * with Floral Embroidery") that at grid width every one truncates to the same
+ * unhelpful stub. The full name is a tap away in the sheet.
+ */
 export function ItemTile({
   item,
   selecting = false,
@@ -58,10 +65,6 @@ export function ItemTile({
           </View>
         ) : null}
       </View>
-      <Text variant="label" numberOfLines={1}>
-        {item.name ?? 'Item'}
-      </Text>
-      {item.primary_color ? <Text variant="caption">{item.primary_color}</Text> : null}
     </Pressable>
   );
 }
